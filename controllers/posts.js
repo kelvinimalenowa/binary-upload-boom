@@ -45,6 +45,20 @@ module.exports = {
       console.log(err);
     }
   },
+  createComment: async (req, res) => {
+    try {
+      await Comment.create({
+        title: req.body.title,
+        caption: req.body.caption,
+        likes: 0,
+        user: req.user.id,
+      });
+      console.log("Comment has been added!");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
